@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Health Assistant | SDG 3: Good Health & Well-being</title>
+    
+    <!-- Google Fonts: Outfit for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="light-theme">
+    
+    <!-- Main Application Wrapper -->
+    <div class="app-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>HealthAI</h1>
+                    <span>SDG 3 Companion</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active" data-page="dashboard">
+                        <a href="#dashboard">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li data-page="chatbot">
+                        <a href="#chatbot">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                            <span>AI Chatbot</span>
+                        </a>
+                    </li>
+                    <li data-page="symptom">
+                        <a href="#symptom">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            <!-- Secondary stethoscope or check icon representation -->
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/><circle cx="12" cy="12" r="10" opacity="0.15"/></svg>
+                            <span>Symptom Checker</span>
+                        </a>
+                    </li>
+                    <li data-page="reminder">
+                        <a href="#reminder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <span>Med reminders</span>
+                        </a>
+                    </li>
+                    <li data-page="tips">
+                        <a href="#tips">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                            <span>Health Tips</span>
+                        </a>
+                    </li>
+                    <li data-page="emergency">
+                        <a href="#emergency">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                            <span>Emergency</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <!-- Presentation/Demo Controller Panel inside Sidebar -->
+            <div class="demo-card">
+                <div class="demo-card-header">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    <span>SDG Project Demo</span>
+                </div>
+                <p>Click below to pre-populate all pages with premium sample data for instant screenshots.</p>
+                <button id="btn-load-demo" class="btn btn-demo">
+                    <span>Load Demo Data</span>
+                </button>
+            </div>
+            
+            <div class="sidebar-footer">
+                <div class="sdg-badge">
+                    <div class="sdg-num">3</div>
+                    <div class="sdg-desc">
+                        <strong>SDG 3 Goal</strong>
+                        <span>Good Health & Well-Being</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Mobile Sidebar Toggle -->
+        <button class="mobile-toggle" aria-label="Toggle navigation">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Upper Header -->
+            <header class="app-header">
+                <div class="header-info">
+                    <h2 id="header-title">Dashboard Overview</h2>
+                    <p id="header-subtitle">Welcome to your health companion platform.</p>
+                </div>
+                <div class="header-actions">
+                    <!-- Theme Toggle Button -->
+                    <button id="theme-toggle" class="header-btn" title="Toggle Theme">
+                        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </button>
+                    <!-- Quick Notification Counter -->
+                    <div class="notification-bell">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                        <span class="badge" id="reminder-badge-count" style="display: none;">0</span>
+                    </div>
+                    <!-- Profile Widget -->
+                    <div class="user-profile">
+                        <div class="avatar">U</div>
+                        <span class="profile-name">Academic User</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- View Content Panels -->
+            <div class="content-body">
+                
+                <!-- 1. DASHBOARD PAGE -->
+                <section id="dashboard" class="page-section active-page">
+                    <!-- Welcome Hero Banner -->
+                    <div class="hero-banner">
+                        <div class="hero-content">
+                            <span class="hero-tag">Empowering Better Health</span>
+                            <h2>Your Intelligent Personal Health Companion</h2>
+                            <p>An interactive digital health platform supporting United Nations Sustainable Development Goal 3 (SDG 3) to ensure healthy lives and promote well-being for all at all ages.</p>
+                            <div class="hero-buttons">
+                                <button class="btn btn-primary" onclick="navigateToPage('chatbot')">
+                                    <span>Consult AI Chatbot</span>
+                                </button>
+                                <button class="btn btn-secondary" onclick="navigateToPage('symptom')">
+                                    <span>Check Symptoms</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="hero-ill">
+                            <!-- Stethoscope design / SDG cross icon -->
+                            <svg viewBox="0 0 200 200" fill="none">
+                                <defs>
+                                    <linearGradient id="grad-pulse" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="var(--primary)" stop-opacity="0.8" />
+                                        <stop offset="100%" stop-color="var(--secondary)" stop-opacity="0.8" />
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="100" cy="100" r="80" fill="url(#grad-pulse)" opacity="0.15" />
+                                <circle cx="100" cy="100" r="60" fill="url(#grad-pulse)" opacity="0.25" />
+                                <path d="M70 100 H 90 L 97 80 L 105 130 L 112 90 L 117 110 L 123 100 H 135" stroke="var(--primary)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <!-- Statistics Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-card-icon col-teal">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            </div>
+                            <div class="stat-card-info">
+                                <h3>Health Score</h3>
+                                <span class="stat-value" id="stat-health-score">92%</span>
+                                <span class="stat-change text-success">↑ Good wellness state</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-icon col-blue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                            </div>
+                            <div class="stat-card-info">
+                                <h3>Daily Steps</h3>
+                                <span class="stat-value" id="stat-steps">8,450</span>
+                                <span class="stat-change text-success">Goal: 10,000</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-icon col-indigo">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            </div>
+                            <div class="stat-card-info">
+                                <h3>Water Intake</h3>
+                                <span class="stat-value" id="stat-water">1.8 L</span>
+                                <span class="stat-change">Goal: 2.5 L</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-icon col-emerald">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                            </div>
+                            <div class="stat-card-info">
+                                <h3>Sleep Duration</h3>
+                                <span class="stat-value" id="stat-sleep">7.5 Hrs</span>
+                                <span class="stat-change text-success">Optimal Recovery</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Secondary Dashboard Content -->
+                    <div class="dashboard-details">
+                        
+                        <!-- SDG 3 Target Card -->
+                        <div class="details-card sdg-card">
+                            <div class="sdg-card-header">
+                                <div class="sdg-icon-large">3</div>
+                                <div>
+                                    <h3>SDG 3: Good Health & Well-Being</h3>
+                                    <span>Target & Core Objectives</span>
+                                </div>
+                            </div>
+                            <p class="sdg-text">
+                                Sustainable Development Goal 3 aims to ensure healthy lives and promote well-being for all at all ages. Key objectives include:
+                            </p>
+                            <ul class="sdg-list">
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                    <span>Reducing global maternal and neonatal mortality rates.</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                    <span>Ending epidemics of AIDS, tuberculosis, malaria, and tropical diseases.</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                    <span>Strengthening prevention and treatment of substance abuse.</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                    <span>Supporting mental health, universal healthcare coverage, and medical research.</span>
+                                </li>
+                            </ul>
+                            <div class="sdg-footer-quote">
+                                "Health is a state of complete physical, mental and social well-being and not merely the absence of disease." — WHO
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Navigation / Features Card -->
+                        <div class="details-card quick-access">
+                            <h3>Quick Health Actions</h3>
+                            <div class="quick-grid">
+                                <button onclick="navigateToPage('chatbot')" class="quick-btn">
+                                    <div class="quick-icon-bg bg-teal">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                    </div>
+                                    <span>Ask Chatbot</span>
+                                </button>
+                                <button onclick="navigateToPage('symptom')" class="quick-btn">
+                                    <div class="quick-icon-bg bg-indigo">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/><circle cx="12" cy="12" r="10" opacity="0.1"/></svg>
+                                    </div>
+                                    <span>Analyze Symptoms</span>
+                                </button>
+                                <button onclick="navigateToPage('reminder')" class="quick-btn">
+                                    <div class="quick-icon-bg bg-blue">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                    </div>
+                                    <span>Med Reminders</span>
+                                </button>
+                                <button onclick="navigateToPage('tips')" class="quick-btn">
+                                    <div class="quick-icon-bg bg-emerald">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+                                    </div>
+                                    <span>Wellness Tips</span>
+                                </button>
+                            </div>
+                            
+                            <!-- Upcoming Reminder Preview -->
+                            <div class="reminder-preview-card">
+                                <div class="rp-header">
+                                    <h4>Upcoming Medication</h4>
+                                    <a href="#reminder" onclick="navigateToPage('reminder')">View All</a>
+                                </div>
+                                <div class="rp-content" id="dashboard-reminder-preview">
+                                    <span class="no-meds-msg">No medication reminders set. Click 'Med Reminders' to schedule one.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 2. AI HEALTH CHATBOT -->
+                <section id="chatbot" class="page-section">
+                    <div class="disclaimer-banner">
+                        <div class="disclaimer-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <p><strong>Medical Disclaimer:</strong> This chatbot provides general wellness, nutrition, fitness, and preventive care information. It is NOT a substitute for professional medical advice, diagnosis, or treatment. Always consult a qualified physician for medical conditions.</p>
+                    </div>
+                    
+                    <div class="chat-layout">
+                        <!-- Chat Main Screen -->
+                        <div class="chat-window">
+                            <div class="chat-header">
+                                <div class="chat-bot-avatar">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                </div>
+                                <div class="chat-bot-info">
+                                    <h3>HealthAI Assistant</h3>
+                                    <span>Online | Offline Local NLP Engine</span>
+                                </div>
+                            </div>
+                            
+                            <div class="chat-messages" id="chat-messages-container">
+                                <!-- Initial message from bot -->
+                                <div class="chat-bubble bot">
+                                    <div class="bubble-content">
+                                        <p>Hello! I am your HealthAI assistant. I can help with wellness advice, nutrition tips, exercise schedules, hydration goals, and general medical education. How can I support your health journey today?</p>
+                                    </div>
+                                    <span class="bubble-time">Just now</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Chat Input Form -->
+                            <form class="chat-input-area" id="chat-form">
+                                <input type="text" id="chat-input-text" placeholder="Ask about healthy diets, cardio workouts, sleep tips, or vitamins..." autocomplete="off" required>
+                                <button type="submit" class="btn btn-primary btn-send">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                                </button>
+                            </form>
+                        </div>
+                        
+                        <!-- Suggestions Sidebar panel -->
+                        <div class="chat-suggestions">
+                            <h3>Suggested Topics</h3>
+                            <p>Click any prompt below to ask the AI instantly:</p>
+                            <div class="suggestion-list">
+                                <button class="suggestion-btn" onclick="sendChatPrompt('What is a balanced diet plan?')">Balanced Diet Plan</button>
+                                <button class="suggestion-btn" onclick="sendChatPrompt('How can I sleep better at night?')">Tips for Better Sleep</button>
+                                <button class="suggestion-btn" onclick="sendChatPrompt('What are some simple home stretching exercises?')">Daily Stretching Routines</button>
+                                <button class="suggestion-btn" onclick="sendChatPrompt('Why is hydration important for mental health?')">Hydration and Brain Function</button>
+                                <button class="suggestion-btn" onclick="sendChatPrompt('What are the benefits of vitamin D?')">Importance of Vitamin D</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 3. SYMPTOM CHECKER -->
+                <section id="symptom" class="page-section">
+                    <div class="disclaimer-banner danger-alert">
+                        <div class="disclaimer-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <p><strong>Emergency Alert:</strong> If you are experiencing severe symptoms like sudden chest pain, shortness of breath, severe bleeding, or allergic reactions, please dial emergency services immediately or visit the nearest ER.</p>
+                    </div>
+                    
+                    <div class="symptom-layout">
+                        <!-- Left Panel: User Input Form -->
+                        <div class="symptom-form-card">
+                            <h3>Symptom Analyzer</h3>
+                            <p>Type your symptoms below or select from common tags to analyze potential wellness indicators, severity levels, and next steps.</p>
+                            
+                            <form id="symptom-form">
+                                <div class="form-group">
+                                    <label for="symptom-text-input">Describe your symptoms in detail:</label>
+                                    <textarea id="symptom-text-input" rows="4" placeholder="Example: I have a mild headache, a sore throat, and a runny nose for the last 2 days..." required></textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Or click tags to add common symptoms:</label>
+                                    <div class="symptom-tags-container">
+                                        <button type="button" class="tag-btn" data-symptom="headache">Headache</button>
+                                        <button type="button" class="tag-btn" data-symptom="fever">Fever</button>
+                                        <button type="button" class="tag-btn" data-symptom="cough">Cough</button>
+                                        <button type="button" class="tag-btn" data-symptom="sore throat">Sore Throat</button>
+                                        <button type="button" class="tag-btn" data-symptom="fatigue">Fatigue</button>
+                                        <button type="button" class="tag-btn" data-symptom="nausea">Nausea</button>
+                                        <button type="button" class="tag-btn" data-symptom="chest pain">Chest Pain</button>
+                                        <button type="button" class="tag-btn" data-symptom="shortness of breath">Shortness of Breath</button>
+                                        <button type="button" class="tag-btn" data-symptom="stomach ache">Stomach Ache</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="symptom-duration">Duration of Symptoms:</label>
+                                        <select id="symptom-duration">
+                                            <option value="today">Started today</option>
+                                            <option value="few-days" selected>A few days (1-3 days)</option>
+                                            <option value="week">About a week</option>
+                                            <option value="chronic">More than 2 weeks</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="symptom-age">Age Group:</label>
+                                        <select id="symptom-age">
+                                            <option value="child">Child (0-12)</option>
+                                            <option value="teen">Teen (13-17)</option>
+                                            <option value="adult" selected>Adult (18-64)</option>
+                                            <option value="senior">Senior (65+)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="button" id="btn-reset-symptoms" class="btn btn-secondary-outline">Clear Form</button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <span>Analyze Symptoms</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Right Panel: Analysis Output -->
+                        <div class="symptom-results-card" id="symptom-results-container">
+                            <div class="symptom-empty-state">
+                                <div class="pulse-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/><circle cx="12" cy="12" r="10" opacity="0.15"/></svg>
+                                </div>
+                                <h4>Awaiting Input</h4>
+                                <p>Fill out the symptom details on the left and click "Analyze Symptoms" to see severity, possible causes, and professional recommendations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 4. MEDICINE REMINDER -->
+                <section id="reminder" class="page-section">
+                    <div class="reminder-layout">
+                        <!-- Medicine Entry Form -->
+                        <div class="reminder-form-card">
+                            <h3 id="reminder-form-title">Add Medication Schedule</h3>
+                            <p>Schedule your medicine dosages. The assistant will log and track upcoming schedules. Data is stored locally on this machine.</p>
+                            
+                            <form id="reminder-form">
+                                <!-- Hidden input for editing mode -->
+                                <input type="hidden" id="edit-reminder-id" value="">
+                                
+                                <div class="form-group">
+                                    <label for="med-name">Medication Name:</label>
+                                    <input type="text" id="med-name" placeholder="e.g. Amoxicillin, Vitamin D3, Metformin" required>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="med-dosage">Dosage:</label>
+                                        <input type="text" id="med-dosage" placeholder="e.g. 500mg, 1 tablet, 2 drops" required>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="med-frequency">Frequency:</label>
+                                        <select id="med-frequency">
+                                            <option value="Once Daily" selected>Once Daily</option>
+                                            <option value="Twice Daily">Twice Daily</option>
+                                            <option value="Three Times Daily">Three Times Daily</option>
+                                            <option value="As Needed">As Needed (PRN)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="med-start-date">Start Date:</label>
+                                        <input type="date" id="med-start-date" required>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="med-time">Reminder Time:</label>
+                                        <input type="time" id="med-time" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="med-notes">Notes / Special Instructions (Optional):</label>
+                                    <textarea id="med-notes" rows="2" placeholder="e.g. Take with food, avoid dairy, take before sleeping..."></textarea>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="button" id="btn-cancel-edit" class="btn btn-secondary-outline" style="display:none;">Cancel Edit</button>
+                                    <button type="submit" id="btn-submit-reminder" class="btn btn-primary">
+                                        <span>Add Reminder</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Reminders List -->
+                        <div class="reminder-list-card">
+                            <div class="reminder-list-header">
+                                <h3>Scheduled Medications</h3>
+                                <span class="badge badge-primary" id="reminder-badge-count-list">0 Active</span>
+                            </div>
+                            
+                            <div class="reminders-container" id="reminders-list-container">
+                                <!-- Dynamically populated list -->
+                                <div class="reminder-empty-state">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                    <h4>No Active Reminders</h4>
+                                    <p>Fill out the form on the left to set up medical reminders and tracking.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 5. DAILY HEALTH TIPS -->
+                <section id="tips" class="page-section">
+                    <div class="tips-layout">
+                        <!-- Upper Banner for category filter -->
+                        <div class="tips-filter-banner">
+                            <div class="tf-text">
+                                <h3>Wellness & Health Education Library</h3>
+                                <p>Filter through categorized wellness cards. Use the generator to discover random health tips for supporting a healthier lifestyle.</p>
+                            </div>
+                            <button id="btn-roll-tip" class="btn btn-primary btn-roll-animate">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                                <span>Get Random Tip</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Category tabs -->
+                        <div class="category-tabs">
+                            <button class="tab-btn active" data-category="all">All Categories</button>
+                            <button class="tab-btn" data-category="nutrition">Nutrition</button>
+                            <button class="tab-btn" data-category="exercise">Exercise</button>
+                            <button class="tab-btn" data-category="mental">Mental Health</button>
+                            <button class="tab-btn" data-category="hydration">Hydration</button>
+                            <button class="tab-btn" data-category="sleep">Sleep</button>
+                        </div>
+                        
+                        <!-- Tip Grid Output -->
+                        <div class="tips-grid" id="tips-grid-container">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 6. EMERGENCY SECTION -->
+                <section id="emergency" class="page-section">
+                    <div class="emergency-grid">
+                        
+                        <!-- Emergency Helplines -->
+                        <div class="emergency-card contacts-card">
+                            <div class="em-card-header col-red">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                <h3>Global & Local Emergency Helplines</h3>
+                            </div>
+                            <p>Keep these vital numbers saved in your speed dial for emergencies:</p>
+                            
+                            <div class="helpline-list">
+                                <div class="helpline-item">
+                                    <div class="hl-info">
+                                        <strong>Medical Emergency Service</strong>
+                                        <span>Primary ambulance and paramedical support</span>
+                                    </div>
+                                    <div class="hl-number">911 / 112</div>
+                                </div>
+                                <div class="helpline-item">
+                                    <div class="hl-info">
+                                        <strong>Poison Control Hotline</strong>
+                                        <span>Toxic ingestion or inhalation emergencies</span>
+                                    </div>
+                                    <div class="hl-number">1-800-222-1222</div>
+                                </div>
+                                <div class="helpline-item">
+                                    <div class="hl-info">
+                                        <strong>Mental Health Crisis Helpline</strong>
+                                        <span>Immediate emotional support and suicide prevention</span>
+                                    </div>
+                                    <div class="hl-number">988</div>
+                                </div>
+                                <div class="helpline-item">
+                                    <div class="hl-info">
+                                        <strong>Disaster Management Support</strong>
+                                        <span>Natural disasters or public hazards</span>
+                                    </div>
+                                    <div class="hl-number">108 / 999</div>
+                                </div>
+                            </div>
+                            
+                            <div class="custom-contacts-section">
+                                <h4>My Emergency Contacts</h4>
+                                <form id="custom-contact-form">
+                                    <div class="form-row">
+                                        <div class="form-group col-6">
+                                            <input type="text" id="contact-name" placeholder="Contact Name" required>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <input type="text" id="contact-phone" placeholder="Phone Number" required>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-sm">Add Contact</button>
+                                </form>
+                                <div id="custom-contacts-list" class="custom-contacts-list">
+                                    <!-- Populated from local storage -->
+                                    <span class="no-meds-msg">No custom emergency contacts added.</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- First-Aid Interactive Guide -->
+                        <div class="emergency-card first-aid-card">
+                            <div class="em-card-header col-orange">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                <!-- Better cross icon for medical -->
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 10.5V20a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-9.5a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4z"/><path d="M12 9v6M9 12h6"/></svg>
+                                <h3>First-Aid Quick Guide</h3>
+                            </div>
+                            <p>Select a scenario to view immediate basic life support and safety procedures:</p>
+                            
+                            <div class="first-aid-tabs">
+                                <button class="fa-tab-btn active" data-topic="cpr">CPR Instruction</button>
+                                <button class="fa-tab-btn" data-topic="choking">Choking (Heimlich)</button>
+                                <button class="fa-tab-btn" data-topic="burns">Thermal Burns</button>
+                                <button class="fa-tab-btn" data-topic="bleeding">Severe Bleeding</button>
+                            </div>
+                            
+                            <div class="first-aid-content" id="first-aid-display-container">
+                                <!-- Dynamic guide updates -->
+                            </div>
+                        </div>
+                        
+                    </div>
+                </section>
+                
+            </div>
+            
+            <!-- Global Footer -->
+            <footer class="app-footer">
+                <div class="footer-sdg-branding">
+                    <div class="sdg-color-strip"></div>
+                    <p>Designed in alignment with <strong>UN Sustainable Development Goal 3: Good Health & Well-Being</strong></p>
+                </div>
+                <p class="copyright">&copy; 2026 Academic SDG Submission. Developed with HealthAI Systems. All rights reserved.</p>
+            </footer>
+        </main>
+        
+    </div>
+    
+    <!-- Loaded Javascript Files -->
+    <script src="js/tips.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/symptoms.js"></script>
+    <script src="js/reminders.js"></script>
+    <script src="js/emergency.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
